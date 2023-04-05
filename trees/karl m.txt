@@ -1,0 +1,10 @@
+1~What do you want? \ I've come to talk to you about your car's extended warranty:0:2; how doing:1:3; Let me ask you a personal question — Mr. M. how is your job:1:4
+1~Sorry, I have buisness to attend to. Please come back when you have an important issue \ Bye:0:x
+1~I'm doing pretty well. Just hit a six figure salary in my job with the New York Daily Tribute. I feel kind of bad though — watching all the suffering on the street. \ What if I told you you could help those people:0.5:5; The Daily Tribute? Are you a good journalist?:2:2; Interesting — have you ever thought about communism:3:3
+1~I've recently gotten a promotion. Why are you so nosy? \ Well, I think many problems exist with the current job market, and you could be making a lot more money:2:?; I think you could use your position of power to help those in need:0:?; Don't you wnat to be able to support your family? With the current economic situation, hard working people like you all around Millburn are unable to provide their family with the money and materials they deserve:1:? 
+1~Okay, but I don't care that much. I'm not paticularly intrested in helping those that can't help themsleves. Life, the economy — it's survival of the fittest. If they can't make it, it's none of my concern \ That's an interesting perspective. Why do you think that?:1:1; With my proposition, people that work hard will still benefit, but those who have unfavorable circumstances will still be able to prosper:2:2; You're a horrible person. There's a reason we don't see people like you in power. You're horrid, and I don't know why i decided to talk to you:3:3
+2~What's 1+7? \ A:1:1; B:2:2; C:3:3
+2~What's 6+8? \ A:1:1; B:2:2; C:3:3
+3~What is the meaning of life? \ A:1:1; B:2:2; C:3:3
+3~Why's Alex bad? \ A:1:1; B:2:2; C:3:3
+3~What's nine plus six? \ A:1:1; B:2:2; C:3:3

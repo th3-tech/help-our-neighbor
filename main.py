@@ -1,17 +1,21 @@
-import os, time, textwrap, characters
+import textwrap, characters
+from os import system, name
+from time import sleep
+from playsound import playsound
 
 
 def openingText():
+  clear()
   print('HELP THY NEIGHBORS')
-  time.sleep(1)
-  os.system('clear')
-  #time.sleep(0.2)
+  sleep(1)
+  clear()
+  #sleep(0.2)
   print('HELP YOUR NEIGHBORS')
-  time.sleep(1)
-  os.system('clear')
-  #time.sleep(0.3)
+  sleep(1)
+  clear()
+  #sleep(0.3)
   print('HELP OUR NEIGHBORS')
-  time.sleep(1)
+  sleep(1)
   print('\nMade for the Millburn 2023 STEAMfest \nby alex delorenzo, dialogue trees by ayati jend\n\n\n')
 
 
@@ -23,7 +27,7 @@ def prompt(question_list):
     for i, question in enumerate(question_list):
       if answer.lower() == question.lower() or answer == str(i + 1):
         return (i + 1)
-  except TypeError:
+  except:
     print('please enter a number or string\n')
     prompt(question_list)
 
@@ -34,7 +38,7 @@ def introduction():
   if prompt(['Yes', 'No']) == 2:
     print('okay?')
   else:
-    os.system('clear')
+    clear()
     print(
       textwrap.fill('"It is high time that Communists should openly, in the face of the whole world, publish their views, their aims, their tendencies, and meet this nursery tale of the Spectre of Communism" \n— Preamble of the Communist Manifesto.', 80))
     print('\nThis is HELP OUR NEIGHBORS by Alex DeLorenzo and Ayati Jend\n\nBegin your journey:')
@@ -86,7 +90,7 @@ def actions():
     )
     actions()
   elif action == 5:
-    os.system('clear')
+    clear()
     actions()
 
 
@@ -145,7 +149,7 @@ def converse(file, level):
 
 def ending():
   print("\n\n\nYou've reached the end of the game. Continue?")
-  actions() if prompt(['yes', 'no']) == 2 else os.system('clear')
+  actions() if prompt(['yes', 'no']) == 2 else clear()
   print('-----Twelve Years Later----- (press enter to continue)')
   endingText = [
     'Your back aches after hours on your throne.',
@@ -164,7 +168,7 @@ def ending():
     '"Why do you come?"',
     '"to see you. some say you are no man, but a beast."', 'you scowl',
     '"We are a man, as any other."', 'he laughs', '"you lie, my comrade."',
-    '"Who are you?"', '"ha. you don\'t remember me, tsar?"',
+    '"Who are you?"', 'a hollow chuckle', '"ha. you don\'t remember me?"',
     "'Why should we remember the likes of you?'", 'he chuckles',
     '"not a man remains in this town to pay you tribute or frolick in this utopia."',
     '"Do not critize our regime."', 'your hand lowers to your holster',
@@ -177,13 +181,48 @@ def ending():
     print(text, end='')
   input()
   print('\nhe pauses\n')
-  time.sleep(1)
-  for character in 'slowly:      "long live the tsar"':
+  sleep(1)
+  for character in 'slowly:      "long live my vozhd"':
     print(character, end='', flush=True)
-    time.sleep(0.3)
-  time.sleep(3)
+    sleep(0.3)
+  sleep(3)
   print('\n\n\nbang')
+  playsound('theme.wav', block=False)
+  sleep(3)
+  credits()
+  
 
+def credits():
+  print()
+  with open('credits.txt') as f:
+    for lines in f.readlines():
+      for character in lines:
+        print(character, end='', flush=True)
+        sleep(0.1)
+  sleep(5)
+  print('\n\nPlay Again?')
+  a = prompt(['yes', 'no'])
+  if a == 2:
+    return()
+  else:
+    print('Restart Progress? (Cannot be undone)')
+    if prompt(['Yes', 'No']) == 1:
+      for i in characters.discovered:
+        i.level = 1
+      characters.discovered = [characters.karl_m]
+    clear()
+    introduction()
 
-openingText()
-introduction()
+def clear():
+ 
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+ 
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
+clear()
+ending()
+# openingText()
+# introduction()

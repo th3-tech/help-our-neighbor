@@ -58,7 +58,7 @@ def actions():
     for i, person in enumerate(characters.discovered):
       if a == i+1:
         person.expose()
-        converse(person.file, person.level)
+        converse(person)
     actions()
   elif action == 2:  #Personality assessments
     while True:
@@ -95,8 +95,10 @@ def actions():
     actions()
 
 
-def converse(file, level):
+def converse(person):
   score = 0
+  file = person.file
+  level = person.level
   with open(f'trees/{file}') as f:
     actions = 5
     line_num = 0
@@ -141,8 +143,11 @@ def converse(file, level):
           actions -= 1
           line_num = int(next_question_num) - 1
           break
-  if score >= 10:
-    level += 1
+  if score >= 5:
+    #level += 1
+    pos = characters.discovered.index(person)
+    if pos == len(characters.discovered) - 1:
+      characters.discovered.append(characters.all_characters[len(characters.discovered)])
   a = input('1) Try Again\n2) Give up (for now)\n>> ')
   if a == '1':
     converse(file, level)
@@ -226,7 +231,7 @@ def clear():
     # for mac and linux(here, os.name is 'posix')
     else:
         _ = system('clear')
-# clear()
-
+clear()
+# ending()
 openingText()
 introduction()

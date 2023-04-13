@@ -48,7 +48,7 @@ def introduction():
 
 def actions():
   print()
-  action = prompt(['Convince the populace', 'Review Personality Assesments', 'See Progress', 'Help', 'Clear'])
+  action = prompt(['Convince the populace', 'Review Personality Assessments', 'See Progress', 'Help', 'Clear'])
   
   if action == 1:  #Convince the Populace
     output = []
@@ -57,9 +57,10 @@ def actions():
     a = prompt(output)
     for i, person in enumerate(characters.discovered):
       if a == i+1:
+        person.expose()
         converse(person.file, person.level)
     actions()
-  elif action == 2:  #Personality Assesments
+  elif action == 2:  #Personality assessments
     while True:
       try:
         page = int(input('\nPage (input 0 for all entries) >>> '))
@@ -71,13 +72,13 @@ def actions():
       for i in range(10):
         try:
           print(
-            characters.discovered[i + (int(page) - 1) * 10].personality_assesment)
+            characters.discovered[i + (int(page) - 1) * 10].personality_assessment)
         except IndexError:
           print('\n--No More Entries--')
           break
     else:
       for i in characters.discovered:
-        print(i.personality_assesment)
+        print(i.personality_assessment)
     actions()
   elif action == 3:  #progress
     print()  #spacing
@@ -86,7 +87,7 @@ def actions():
     actions()
   elif action == 4:  #help
     print(
-      "\nAnswer questions with the number beside the option or the name itself (not case sensitive, but I would reccomend numbers to avoid errors)"
+      "\nAnswer questions with the number beside the option or the name itself (not case sensitive, but I would recommend numbers to avoid errors)"
     )
     actions()
   elif action == 5:
@@ -124,7 +125,7 @@ def converse(file, level):
       question, answer_choices = text.split(" \\ ")
       print('{}\n'.format(question))
       choices = answer_choices.split("; ")
-      #split answer, score, next questino
+      #split answer, score, next question
       for i, answer_choice in enumerate(choices):
         answer, score_value, route = answer_choice.split(":")
         print('{}) {}'.format(i + 1, answer))
@@ -136,13 +137,13 @@ def converse(file, level):
         if user_answer.lower() == answer.lower() or user_answer == str(i + 1):
           if next_question_num == 'x':
             return
-          score += int(score_value)
+          score += float(score_value)
           actions -= 1
           line_num = int(next_question_num) - 1
           break
   if score >= 10:
     level += 1
-  a = input('1) go again\n2) stop\n>> ')
+  a = input('1) Try Again\n2) Give up (for now)\n>> ')
   if a == '1':
     converse(file, level)
 
@@ -153,15 +154,15 @@ def ending():
   print('-----Twelve Years Later----- (press enter to continue)')
   endingText = [
     'Your back aches after hours on your throne.',
-    'The steel uniform burns with its heavy fastners digging into your flesh and the epaulette weighing down upon your shoulder.',
+    'The steel uniform burns with its heavy fasteners digging into your flesh and the epaulette weighing down upon your shoulder.',
     'Your heavy torso is marred with bullet holes and scars',
     'The wounds in your soul run deeper.', 'You had won',
     'the word holds little meaning',
-    'In every sense of the word you were succesful:',
+    'In every sense of the word you were successful:',
     'You had riches and power, control beyond your wildest dreams.', 'and yet',
     'You stare at the skulls out the window, piled nearly to the highest floor of the castle',
     '\nBooted footsteps echo through the empty hall.', '"Guards!"',
-    'A miserable shilloute of a man limps into the throne room',
+    'A miserable silhouette of a man limps into the throne room',
     '"they\'ve left. you know that"',
     '"Yes, yes. We didn\'t need them anymore."',
     '"oh, none would dare, would they?"', '"None would."', '\na pause\n',
@@ -170,10 +171,10 @@ def ending():
     '"We are a man, as any other."', 'he laughs', '"you lie, my comrade."',
     '"Who are you?"', 'a hollow chuckle', '"ha. you don\'t remember me?"',
     "'Why should we remember the likes of you?'", 'he chuckles',
-    '"not a man remains in this town to pay you tribute or frolick in this utopia."',
-    '"Do not critize our regime."', 'your hand lowers to your holster',
-    '"you promissed us peace. you promised us land and bread."',
-    '"PEASENT, WHAT IS YOUR NAME"', '"karl"',
+    '"not a man remains in this town to pay you tribute or frolic in this utopia."',
+    '"Do not criticize our regime."', 'your hand lowers to your holster',
+    '"you promised us peace. you promised us land and bread."',
+    '"PEASANT, WHAT IS YOUR NAME"', '"karl"',
     '"Karl, say another word and you\'ll join that pile." you gesture out the window'
   ]
   for text in endingText:
@@ -186,8 +187,11 @@ def ending():
     print(character, end='', flush=True)
     sleep(0.3)
   sleep(3)
+  try:
+    playsound('theme.wav', block=False)
+  except:
+    print('    --Audio file doesn\'t want to play nice, just imagine a very dissonant transposition of the Soviet Anthem--')
   print('\n\n\nbang')
-  playsound('theme.wav', block=False)
   sleep(3)
   credits()
   
@@ -222,7 +226,7 @@ def clear():
     # for mac and linux(here, os.name is 'posix')
     else:
         _ = system('clear')
-clear()
-ending()
-# openingText()
-# introduction()
+# clear()
+
+openingText()
+introduction()
